@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:10:08 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/08 12:20:51 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:56:38 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,29 @@ static t_env	*ft_create_node(char *env)
 	t_env	*new;
 
 	new = (t_env *)malloc(sizeof(t_env));
+    g_data.trash_list = ft_add_trash(&g_data.trash_list, new);
 	if (!new)
-		exit(EXIT_FAILURE);
-	new->line = env;
+		return(NULL);
+	new->line = ft_strdup(env);
+    g_data.trash_list = ft_add_trash(&g_data.trash_list, new->line);
 	new->name = ft_costume_strchr(env, '=');
-	new->value = ft_strchr(env, '=');
+    g_data.trash_list = ft_add_trash(&g_data.trash_list, new->name);
+	new->value = ft_strdup(ft_strchr(env, '='));
+    g_data.trash_list = ft_add_trash(&g_data.trash_list, new->value);
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
 }
 
-static t_env	*ft_add_node(t_env **head, char *env)
+static t_env	*ft_add_env(t_env **head, char *env)
 {
 	t_env	*new;
 	t_env	*temp;
 
 	new = ft_create_node(env);
-	if (!*head)
+    if(!new)
+        return NULL;
+    if (!*head)
 		return (new);
 	temp = *head;
 	while (temp->next != NULL)
@@ -47,15 +53,9 @@ static t_env	*ft_add_node(t_env **head, char *env)
 void    get_env(t_env **env_list, char **env)
 {
     int i;
-    t_env   *tmp;
 
     *env_list = NULL;
     i = -1;
     while(env[++i])
-        *env_list = ft_add_node(env_list, env[i]);
-    
-    tmp = *env_list;
-    printf("=== THE LINE IS ==== %s\n", tmp->line);
-    printf("=== THE NAME IS ==== %s\n", tmp->name);
-    printf("=== THE VALUE IS ==== %s\n", tmp->value);
+        *env_list = ft_add_env(env_list, env[i]);
 }

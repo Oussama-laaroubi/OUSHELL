@@ -6,7 +6,7 @@
 #    By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 10:57:09 by olaaroub          #+#    #+#              #
-#    Updated: 2024/08/08 11:09:14 by olaaroub         ###   ########.fr        #
+#    Updated: 2024/08/08 13:28:18 by olaaroub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -fsanitize=address -g3
 
-SRC = src/main.c src/get_env.c
+SRC = src_parsing/main.c src_parsing/get_env.c src_parsing/trash.c
 # SRC += 
 # SRC += 
 

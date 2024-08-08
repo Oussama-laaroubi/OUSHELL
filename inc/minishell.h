@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/08 11:59:10 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:30:14 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 
         // STRUCTS //
 
+        
+typedef struct  s_trash
+{
+    void            *address;
+    struct s_trash  *next;
+}               t_trash;
+
 typedef struct  s_env
 {
     char            *name;
@@ -35,13 +42,9 @@ typedef struct  s_env
 
 typedef struct  s_program
 {
-    t_env   *env_list;
+    t_trash     *trash_list;
+    t_env       *env_list;
 }               t_program;
-
-
-
-
-
 
 
 
@@ -49,9 +52,9 @@ typedef struct  s_program
 
         // FUNCTIONS //
 void    get_env(t_env **env_list, char **env);
+t_trash	*ft_add_trash(t_trash **head, void *addr);
+void    free_trash(t_trash **head);
 
 
-
-
-
+ extern t_program g_data;
 #endif
