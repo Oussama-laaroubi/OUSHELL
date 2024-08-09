@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/09 12:23:26 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:48:37 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#define MALLOC_ERROR -77
+
 
         // STRUCTS //
-
+// int dbl_quote =  -77;
+// int sngl_quote = -77;
         
 typedef struct  s_trash
 {
@@ -44,6 +47,7 @@ typedef struct  s_env
 
 typedef struct  s_program
 {
+    
     t_trash     *trash_list;
     t_env       *env_list;
 }               t_program;
