@@ -6,15 +6,15 @@
 #    By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 10:57:09 by olaaroub          #+#    #+#              #
-#    Updated: 2024/08/08 13:28:18 by olaaroub         ###   ########.fr        #
+#    Updated: 2024/08/09 12:23:49 by olaaroub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 CFLAGS += -fsanitize=address -g3
 
-SRC = src_parsing/main.c src_parsing/get_env.c src_parsing/trash.c
+SRC = src_parsing/main.c src_parsing/get_env.c src_parsing/trash.c src_parsing/split_mgem7a.c
 # SRC += 
 # SRC += 
 
@@ -26,7 +26,7 @@ LIB = libft/libft.a
 all:  $(NAME)
 
 $(NAME): $(OBJ) $(LIB)
-	$(CC) $(CFLAGS) $(OBJ) $(LIB)  -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIB)  -lreadline -o $(NAME)
 
 $(LIB):
 	$(MAKE) -C libft
