@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:44:35 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/11 17:40:48 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/11 18:46:05 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static char	**fill_strings(char *line, char **result, int count)
 			line++;
 		l = word_lenght(line);
 		result[k] = (char *)malloc((l + 1) * sizeof(char));
-		ft_add_trash(&g_data.trash_list, result[k]);
+		g_data.trash_list = ft_add_trash(&g_data.trash_list, result[k]);
 		if (!result[k])
 			return (NULL);
 		ft_strlcpy(result[k], line, l + 1);
@@ -132,9 +132,14 @@ char    **split_mgem7a(char *line)
 	buff = line;
 	count = count_words(buff);
 	result = (char **)malloc(sizeof(char *) * (count  + 1));
-	ft_add_trash(&g_data.trash_list, result);
+	g_data.trash_list = ft_add_trash(&g_data.trash_list, result);
 	if(!result)
 		return(NULL);
 	result = fill_strings(line, result, count);
     return result;
+	// '$USER'"FJASDNVLKN $USER"'''$LS'
+	// 'sjdk' > expand > WORD
+	// '$USER' > NOT TO EXPAND > WORD
+	// "'"$USER"'"
+	// '$USER'$USER
 }

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/11 17:50:50 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/11 22:18:09 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,42 @@
 
 t_program   g_data;
 
+void	print_tokens(t_tockens *tokens)
+{
+	t_tockens	*token;
+
+	token = tokens;
+	while (token)
+	{
+		printf("value => '%s'\n", token->word);
+		printf("type => '%u'\n", token->type);
+		token = token->next;
+	}
+}
+
 int main(int ac, char **av, char **env)
 {
-    t_program   program;
     char *line = NULL;
     
-    program.trash_list = NULL;
-    program.tocken_list = NULL;
     (void)ac;
     (void)av;
     while(1)
     {
-        get_env(&program.env_list, env);
+        g_data.env_list = NULL;
+        g_data.trash_list = NULL;
+        g_data.tocken_list = NULL;
+        get_env(&g_data.env_list, env);
+        
+        line = readline("Enter a text: ");
+        if(line && *line)
+            add_history(line);
+        tockenizing(line);
+        print_tokens(g_data.tocken_list);
+        free_trash(&g_data.trash_list);
         if(line)
         {
             free(line);
             line = NULL;
         }
-        line = readline("Enter a text: ");
-        tockenizing(line);
- 
-        if(line && *line)
-            add_history(line);
-        free_trash(&program.trash_list);
     }
 }
