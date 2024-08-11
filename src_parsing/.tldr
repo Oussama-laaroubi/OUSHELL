@@ -43,9 +43,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 50.61202754847187,
-			"y": 33.142555176523565,
-			"lastActivityTimestamp": 1723214108436,
+			"x": 223.87571281451346,
+			"y": 330.57421875,
+			"lastActivityTimestamp": 1723391510890,
 			"meta": {}
 		},
 		{
@@ -64,7 +64,7 @@
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "cross",
+				"type": "move",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -74,8 +74,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 876,
-				"h": 902
+				"w": 914,
+				"h": 966
 			},
 			"insets": [
 				false,
@@ -92,7 +92,7 @@
 			"isFocused": true,
 			"devicePixelRatio": 1,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": false,
+			"isHoveringCanvas": true,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,
@@ -106,7 +106,7 @@
 			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:yQDD8nDm62aENDAINqglT"
+				"shape:4y2Us86Y0DXbPGq8eOVqF"
 			],
 			"hoveredShapeId": null,
 			"erasingShapeIds": [],
@@ -118,9 +118,9 @@
 			"typeName": "instance_page_state"
 		},
 		{
-			"x": 63.50098042268881,
-			"y": 27.51210671805734,
-			"z": 0.9727199551873401,
+			"x": 140.12428718548654,
+			"y": 227.42578125,
+			"z": 1,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -926,8 +926,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 106,
-			"y": 428.8515625,
+			"x": 42,
+			"y": 418.8515625,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,
@@ -1282,8 +1282,8 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 126.6873661959123,
-			"y": 343.6121804674292,
+			"x": 123.6873661959123,
+			"y": 346.6121804674292,
 			"rotation": 0,
 			"isLocked": false,
 			"opacity": 1,

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:44:35 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/11 12:37:50 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/11 17:40:48 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,6 @@ char    **split_mgem7a(char *line)
 	ft_add_trash(&g_data.trash_list, result);
 	if(!result)
 		return(NULL);
-	result = fill_strings(line, result, count );
+	result = fill_strings(line, result, count);
     return result;
 }

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/11 10:46:58 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/11 17:23:01 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 
 #define MALLOC_ERROR -77
 
+#define WORD 0
+#define PIPE 1
+#define INPUT 2  // cat < Makefile ======= cat Makefile
+#define OUTPUT 3   // ls > out ==== ls than 7titiha f out
+#define HEREDOC 4  // << delimiter
+#define APPEND 5 
 
-        // STRUCTS //
-// int dbl_quote =  -77;
-// int sngl_quote = -77;
-        
+
 typedef struct  s_trash
 {
     void            *address;
@@ -44,10 +47,16 @@ typedef struct  s_env
     struct s_env    *prev;
 }               t_env;
 
+typedef struct s_tockens
+{
+    char    *word;
+    int     type;
+    struct s_tockens    *next;
+}               t_tockens;
 
 typedef struct  s_program
 {
-    
+    t_tockens   *tocken_list;
     t_trash     *trash_list;
     t_env       *env_list;
 }               t_program;
@@ -63,6 +72,8 @@ void    free_trash(t_trash **head);
 int count_words(char *line);
 int		word_lenght(char *line);
 char    **split_mgem7a(char *line);
+void    tockenizing(char *line);
+t_tockens	*ft_add_tocken(t_tockens **head, char *word, int type);
 
 
  extern t_program g_data;
