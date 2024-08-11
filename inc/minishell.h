@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/09 16:48:37 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/11 10:46:58 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void    get_env(t_env **env_list, char **env);
 t_trash	*ft_add_trash(t_trash **head, void *addr);
 void    free_trash(t_trash **head);
 int count_words(char *line);
+int		word_lenght(char *line);
+char    **split_mgem7a(char *line);
 
 
  extern t_program g_data;

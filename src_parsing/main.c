@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/09 16:31:45 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/11 12:36:45 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int main(int ac, char **av, char **env)
 {
     t_program   program;
     char *line = NULL;
+    char    **split;
     
     program.trash_list = NULL;
     (void)ac;
@@ -31,6 +32,9 @@ int main(int ac, char **av, char **env)
         }
         line = readline("Enter a text: ");
         printf("%d\n", count_words(line));
+        split = split_mgem7a(line);
+        for(int i = 0; i < count_words(line); i++)
+            printf(" == WORD No %d is %s\n", i, split[i]);   
         if(line && *line)
             add_history(line);
         free_trash(&program.trash_list);

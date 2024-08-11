@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:44:35 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/09 16:47:52 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/11 12:37:50 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,41 @@ static	char	*escape_quotes(char *line)
 	return line;
 }
 
-// static	int		word_lenght(char *line)
-// {
-// 	int quotes = 0;
-// 	int i;
+int		word_lenght(char *line)
+{
+	int d_quotes = 0;
+	int s_quotes = 0;
+	int i = 0;
 	
-// 	while(line[i])
-// 	{
-// 		if(line[i] == 34)
-// 		{
-// 			while(line[i] && quotes != 2)
-// 			{
-// 				if(line[i] == 34)
-// 					quotes++;
-// 				line++;
-// 			}
-// 		}
-// 		else if(line[i] == 39)
-// 		{
-// 			while(line[i] && quotes != 2)
-// 			{
-// 				if(line[i] == 39)
-// 					quotes++;
-// 				line++;
-// 			}
-// 		}
-// 	}
-// 	return line;
-// }
+	while(line[i] && !isspace(line[i]))
+	{
+		if(line[i] == 34)
+		{
+			while(line[i])
+			{
+				if(line[i] == 34)
+					d_quotes++;
+				i++;
+				if(d_quotes % 2 ==0)
+					break;
+			}
+		}
+		else if(line[i] == 39)
+		{
+			while(line[i])
+			{
+				if(line[i] == 39)
+					s_quotes++;
+				i++;
+				if(s_quotes % 2 == 0)
+					break;
+			}
+		}
+		else
+			i++;
+	}
+	return i;
+}
 
 int count_words(char *line)
 {
@@ -91,39 +98,43 @@ int count_words(char *line)
 	return (count);
 }
 
-// static char	**fill_strings(char *line, char **result, int count)
-// {
-// 	int	k;
-// 	int	l;
+static char	**fill_strings(char *line, char **result, int count)
+{
+	int	k;
+	int	l;
 
-// 	k = -1;
-// 	while (++k < count && *line)
-// 	{
-// 		while (isspace(*line) && *line)
-// 			line++;
-// 		l = word_lenght(line);
-// 		result[k] = (char *)malloc((l + 1) * sizeof(char));
-// 		ft_add_trash(&g_data.trash_list, result[k]);
-// 		if (!result[k])
-// 			return (ft_free(result, k));
-// 		ft_copy(line, result[k]);
-// 		line += l;
-// 	}
-// 	result[k] = 0;
-// 	return (result);
-// }
+	k = 0;
+	while (k < count && *line)
+	{
+		while (isspace(*line) && *line)
+			line++;
+		l = word_lenght(line);
+		result[k] = (char *)malloc((l + 1) * sizeof(char));
+		ft_add_trash(&g_data.trash_list, result[k]);
+		if (!result[k])
+			return (NULL);
+		ft_strlcpy(result[k], line, l + 1);
+		line += l;
+		k++;
+	}
+	result[k] = 0;
+	return (result);
+}
 
-// char    **split_mgem7a(char *line)
-// {
-// 	char **result;
-// 	int count;
+char    **split_mgem7a(char *line)
+{
+	char **result;
+	char	*buff;
+	int count;
 
-// 	count = count_words(line);
-// 	result = (char **)malloc(sizeof(char *) * count + 1);
-// 	ft_add_trash(&g_data.trash_list, result);
-// 	if(!result)
-// 		return(NULL);
-// 	result = fill_strings(line, result, count);
-	
-    
-// }
+	if(!line)
+		return NULL;
+	buff = line;
+	count = count_words(buff);
+	result = (char **)malloc(sizeof(char *) * (count  + 1));
+	ft_add_trash(&g_data.trash_list, result);
+	if(!result)
+		return(NULL);
+	result = fill_strings(line, result, count );
+    return result;
+}
