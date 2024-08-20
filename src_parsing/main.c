@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/11 22:18:09 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:05:05 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ int main(int ac, char **av, char **env)
         get_env(&g_data.env_list, env);
         
         line = readline("Enter a text: ");
+        printf("== BEFORE == %s\n", line);
         if(line && *line)
             add_history(line);
-        tockenizing(line);
-        print_tokens(g_data.tocken_list);
+        ft_white_spaces(line);
+        printf("== AFTER == %s\n", line);
+        // tockenizing(line);
+        // print_tokens(g_data.tocken_list);
         free_trash(&g_data.trash_list);
         if(line)
         {

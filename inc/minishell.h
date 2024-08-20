@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/11 22:22:39 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:04:39 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int		    word_lenght(char *line);
 char        **split_mgem7a(char *line);
 void        tockenizing(char *line);
 t_tockens	*ft_add_tocken(t_tockens **head, char *word, int type);
+void ft_white_spaces(char *line);
+int is_whitespace(int c);
 
 
  extern t_program g_data;
