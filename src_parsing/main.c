@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/21 16:26:30 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/21 22:21:44 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,46 +27,38 @@ void	print_tokens(t_tockens *tokens)
 	}
 }
 
+void    init_data(void)
+{
+    g_data.env_list = NULL;
+    g_data.trash_list = NULL;
+    g_data.tocken_list = NULL;
+}
+
 int main(int ac, char **av, char **env)
 {
-    char *line = NULL;
+    char *line;
     
     (void)ac;
     (void)av;
+    line = NULL;
     while(1)
     {
-        g_data.env_list = NULL;
-        g_data.trash_list = NULL;
-        g_data.tocken_list = NULL;
+        init_data();
         get_env(&g_data.env_list, env);
-        
         line = readline("Enter a text: ");
         if(line && *line)
             add_history(line);
         if(line && !ft_strcmp(line, "exit"))
-        {
-            free_trash(&g_data.trash_list);
-            free(line);
-            line = NULL;
-            exit(EXIT_SUCCESS);
-        }
+            ft_free_exit(line, true);
         ft_white_spaces(line);
         if(!valid_quotes(line))
         {
             printf("Error: Unclosed quotes detected.\n");
-            free_trash(&g_data.trash_list);
-            free(line);
-            line = NULL;
+            ft_free_exit(line, false);
             continue;
         }
-        
         tockenizing(line);
         print_tokens(g_data.tocken_list);
-        free_trash(&g_data.trash_list);
-        if(line)
-        {
-            free(line);
-            line = NULL;
-        }
+        ft_free_exit(line, false);
     }
 }
