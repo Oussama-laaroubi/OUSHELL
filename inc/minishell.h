@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/16 22:04:39 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:50:09 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdbool.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -75,7 +76,8 @@ char        **split_mgem7a(char *line);
 void        tockenizing(char *line);
 t_tockens	*ft_add_tocken(t_tockens **head, char *word, int type);
 void ft_white_spaces(char *line);
-int is_whitespace(int c);
+int     is_whitespace(int c);
+bool    valid_quotes(char *line);
 
 
  extern t_program g_data;

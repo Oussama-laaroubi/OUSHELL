@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/16 22:05:05 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:26:30 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,27 @@ int main(int ac, char **av, char **env)
         get_env(&g_data.env_list, env);
         
         line = readline("Enter a text: ");
-        printf("== BEFORE == %s\n", line);
         if(line && *line)
             add_history(line);
+        if(line && !ft_strcmp(line, "exit"))
+        {
+            free_trash(&g_data.trash_list);
+            free(line);
+            line = NULL;
+            exit(EXIT_SUCCESS);
+        }
         ft_white_spaces(line);
-        printf("== AFTER == %s\n", line);
-        // tockenizing(line);
-        // print_tokens(g_data.tocken_list);
+        if(!valid_quotes(line))
+        {
+            printf("Error: Unclosed quotes detected.\n");
+            free_trash(&g_data.trash_list);
+            free(line);
+            line = NULL;
+            continue;
+        }
+        
+        tockenizing(line);
+        print_tokens(g_data.tocken_list);
         free_trash(&g_data.trash_list);
         if(line)
         {

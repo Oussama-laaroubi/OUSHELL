@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   white_spaces.c                                     :+:      :+:    :+:   */
+/*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:18:01 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/16 22:17:54 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:02:03 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,59 @@ void ft_white_spaces(char *line)
         j--;
     line[j] = '\0';
 }
+
+bool    valid_quotes(char *line)
+{
+    int i;
+    int j;
+    int len;
+    int d_quotes = 0;
+    int s_quotes = 0;
+
+    
+    if(!line)
+        return true;
+    len = ft_strlen(line);
+    j = 0;
+    i = 0;
+    while (is_whitespace(line[i]))
+        i++;
+    while(i < len)
+    {
+        if(line[i] == 39)
+        {
+            s_quotes++;
+            i++;
+            while(line[i])
+            {
+                if(line[i] == 39)
+                {
+                    s_quotes++;
+                    i++;
+                    break;
+                }
+                i++;
+            }
+        }
+        else if(line[i] == 34)
+        {
+            d_quotes++;
+            i++;
+            while(line[i])
+            {
+                if(line[i] == 34)
+                {
+                    d_quotes++;
+                    i++;
+                    break;
+                }
+                i++;
+            }
+        }
+        else
+            i++;
+    }
+    if((s_quotes % 2 != 0) || (d_quotes % 2 != 0))
+        return false;
+    return true; 
+}   
