@@ -6,16 +6,13 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:18:01 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/21 16:02:03 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:07:42 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int is_whitespace(int c)
-{
-    return (c == 32 || (c >= 9 && c <= 13));
-}
+
 void ft_white_spaces(char *line)
 {
     int i;

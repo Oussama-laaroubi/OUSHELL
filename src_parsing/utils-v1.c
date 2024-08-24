@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 21:58:37 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/21 22:10:28 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:07:49 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ void    ft_free_exit(char *line, bool val)
     }
     if(val)
         exit(EXIT_SUCCESS);
+}
+
+int is_whitespace(int c)
+{
+    return (c == 32 || (c >= 9 && c <= 13));
 }
