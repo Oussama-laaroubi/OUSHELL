@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:18:01 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/22 22:07:42 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/26 10:22:17 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void ft_white_spaces(char *line)
     line[j] = '\0';
 }
 
-bool    valid_quotes(char *line)
+int    valid_quotes(char *line)
 {
     int i;
     int j;
@@ -52,7 +52,7 @@ bool    valid_quotes(char *line)
 
     
     if(!line)
-        return true;
+        return 2;
     len = ft_strlen(line);
     j = 0;
     i = 0;
@@ -94,6 +94,47 @@ bool    valid_quotes(char *line)
             i++;
     }
     if((s_quotes % 2 != 0) || (d_quotes % 2 != 0))
-        return false;
-    return true; 
+        return 0;
+    return 2; 
 }   
+
+char *add_space(char *line)
+{
+    int i = 0;
+    int j = 0;
+    char *buff;
+
+    int len = ft_strlen(line) + line_len(line);
+    buff = malloc(sizeof(char) * len + 1);
+    // g_data.trash_list =  ft_add_trash(&g_data.trash_list, buff);
+    while(line[i])
+    {
+        if(line[i] == '>')
+        {
+            buff[j++] = ' ';
+            buff[j++] = line[i++];
+            if(line[i] == '>')
+                buff[j++] = line[i++];
+            buff[j++] = ' ';
+        }
+        else if(line[i] == '<')
+        {
+            buff[j++] = ' ';
+            buff[j++] = line[i++];
+            if(line[i] == '<')
+                buff[j++] = line[i++];
+            buff[j++] = ' ';
+        }
+        else if(line[i] == '|')
+        {
+            buff[j++] = ' ';
+            buff[j++] = line[i++];
+            buff[j++] = ' ';
+        }
+        else
+            buff[j++] = line[i++];
+    }
+    buff[j] = '\0';
+    free(line);
+    return buff;
+}

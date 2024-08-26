@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/22 22:07:20 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/26 10:29:34 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ int main(int ac, char **av, char **env)
     {
         init_data();
         get_env(&g_data.env_list, env);
-        line = readline("Enter a text: ");
+        line = readline("olaaroub@Latitude:~/Desktop/OUSHELL$ ");
         if(line && *line)
             add_history(line);
         if(line && !ft_strcmp(line, "exit"))
             ft_free_exit(line, true);
+        line = add_space(line);
         ft_white_spaces(line);
         if(!valid_quotes(line))
         {
@@ -58,7 +59,8 @@ int main(int ac, char **av, char **env)
             continue;
         }
         tockenizing(line);
-        print_tokens(g_data.tocken_list);
+        // print_tokens(g_data.tocken_list);
+        printf("%s\n",  line);
         ft_free_exit(line, false);
     }
 }
