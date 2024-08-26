@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:44:35 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/11 18:46:05 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:29:48 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,4 @@ char    **split_mgem7a(char *line)
 		return(NULL);
 	result = fill_strings(line, result, count);
     return result;
-	// '$USER'"FJASDNVLKN $USER"'''$LS'
-	// 'sjdk' > expand > WORD
-	// '$USER' > NOT TO EXPAND > WORD
-	// "'"$USER"'"
-	// '$USER'$USER
 }

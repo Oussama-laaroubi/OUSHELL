@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/25 22:44:37 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:04:47 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void    ft_free_exit(char *line, bool exit);
 int is_whitespace(int c);
 int line_len(char *line);
 char *add_space(char *line);
+int syntax_error(char *line);
 
 
 extern t_program g_data;

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:18:01 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/26 10:22:17 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:30:18 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ char *add_space(char *line)
 
     int len = ft_strlen(line) + line_len(line);
     buff = malloc(sizeof(char) * len + 1);
-    // g_data.trash_list =  ft_add_trash(&g_data.trash_list, buff);
     while(line[i])
     {
         if(line[i] == '>')
