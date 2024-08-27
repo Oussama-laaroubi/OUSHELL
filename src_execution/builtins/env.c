@@ -6,11 +6,11 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:50:29 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/19 20:52:31 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:06:19 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "minishell.h"
 
 int main()
 {

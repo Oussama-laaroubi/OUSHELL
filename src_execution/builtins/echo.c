@@ -6,13 +6,11 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:16:24 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/27 17:21:11 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:06:06 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdbool.h>
-
+#include "minishell.h"
 
 size_t double_str_len(char **str)
 {
