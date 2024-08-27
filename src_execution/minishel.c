@@ -6,7 +6,7 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:08:28 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/14 20:18:51 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:21:28 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,64 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <stdbool.h>
 #define MAX_ARGS 100
+
+
+// size_t double_str_len(char **str)
+// {
+//     size_t len = 0;
+
+//     while (str[len] != NULL)
+//         len++;
+
+//     return len;
+// }
+
+// /////////////////////////////////////////////////
+// bool  n_option(char *args)
+// {
+//     if (args[0] != '-')
+//         return (false);
+    
+//     int i;
+
+//     i = 1;
+//     while (args[i] != '\0')
+//     {
+//         if (args[i] != 'n')
+//             return (false);
+//         i++;
+//     }
+//     return (true);
+// }
+
+// void ft_echo(char **args)
+// {
+//     bool newline;
+//     size_t i;
+//     size_t args_n;
+
+// 	args_n = double_str_len(args);
+	
+//     newline = true;
+//     i = 1;
+//     while (i < args_n && (n_option(args[i]) == true))
+//     {
+//         newline = false;
+//         i++;
+//     }
+//     while (i < args_n)
+//     {
+// 		write (1, args[i], strlen(args[i]));
+//         if (i < args_n - 1)
+//             write(1, " ", 1);
+// 		i++;
+//     }
+//     if (newline)
+//         printf("\n");          
+// }
+/////////////////////////////////////////////////
 
 // Function to mock parsing input into arguments
 char	**mock_parse_command(char *input)
@@ -44,47 +100,6 @@ char	**mock_parse_command(char *input)
 	return (args);
 }
 
-// Example function to simulate built-in command execution
-void	builtin_echo(char **args)
-{
-	int	i;
-	int	newline;
-
-	i = 1;
-	newline = 1;
-	if (args[1] && strcmp(args[1], "-n") == 0)
-	{
-		newline = 0;
-		i++;
-	}
-	while (args[i])
-	{
-		printf("%s", args[i]);
-		if (args[i + 1])
-		{
-			printf(" ");
-		}
-		i++;
-	}
-	if (newline)
-	{
-		printf("\n");
-	}
-}
-
-
-size_t double_str_len(char **str)
-{
-    size_t len = 0;
-
-    while (str[len] != NULL)
-        len++;
-
-    return len;
-}
-
-
-
 int	main(void)
 {
 	char	*input;
@@ -103,29 +118,21 @@ int	main(void)
 
 		
 		// // Example execution of the echo builtin
-		// if (args[0] && strcmp(args[0], "echo") == 0)
-		// {
-		// 	builtin_echo(args);
-		// }
-		// else if (args[0] && strcmp(args[0], "exit") == 0)
-		// {
-		// 	free(input);
-		// 	free(args);
-		// 	break ; // Exit the mock shell
-		// }
-		// else
-		// {
-		// 	printf("Command not recognized.\n");
-		// }
+		if (args[0] && strcmp(args[0], "echo") == 0)
+			ft_echo(args);
 
+		else
+		{
+			printf("Command not recognized.\n");
+		}
 
-	int j = 0;
-	while (args[j])
-	{
-		printf("[%d] -----> %s\n", j, args[j]);
-		j++;
-	}
-	printf("%ld\n", double_str_len(args));
+	// int j = 0;
+	// while (args[j])
+	// {
+	// 	printf("[%d] -----> %s\n", j, args[j]);
+	// 	j++;
+	// }
+	// printf("%ld\n", double_str_len(args));
 
 	
 	free(input);
