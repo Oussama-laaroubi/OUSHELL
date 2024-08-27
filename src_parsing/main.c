@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/26 22:26:30 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:28:09 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	print_tokens(t_tockens *tokens)
 	token = tokens;
 	while (token)
 	{
-		printf("value => '%s'\n", token->word);
-		printf("type => '%u'\n", token->type);
+		printf("value == %s type == %u\n", token->word, token->type);
 		token = token->next;
 	}
 }
@@ -57,11 +56,11 @@ int main(int ac, char **av, char **env)
             ft_free_exit(line, false);
             continue;
         }
+        line = add_space(line);
         tockenizing(line);
-        // line = add_space(line);
+        // printf("%s\n",  line);
         print_tokens(g_data.tocken_list);
         // syntax_error(line); //TODO
-        printf("%s\n",  line);
         ft_free_exit(line, false);
     }
 }

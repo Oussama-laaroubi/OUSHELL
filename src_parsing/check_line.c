@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:18:01 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/26 18:30:18 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/27 10:47:44 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,39 @@ void ft_white_spaces(char *line)
     int i;
     int j;
     int len;
+    char quote_char = '\0';
 
     i = 0;
     j = 0;
-    if(!line)
+    if (!line)
         return;
     len = ft_strlen(line);
     while (is_whitespace(line[i]))
         i++;
     while (i < len)
     {
-        if (is_whitespace(line[i])) 
+        if ((line[i] == '"' || line[i] == '\'') && quote_char == '\0')
+        {
+            quote_char = line[i];
+            line[j++] = line[i++];
+        }
+        else if (line[i] == quote_char)
+        {
+            quote_char = '\0';
+            line[j++] = line[i++];
+        }
+        else if (quote_char == '\0' && is_whitespace(line[i]))
         {
             line[j++] = ' ';
-            while (is_whitespace(line[i]))
+            while (i < len && is_whitespace(line[i]))
                 i++;
-        } 
+        }
         else
+        {
             line[j++] = line[i++];
+        }
     }
-    if (j > 0 && is_whitespace(line[j-1]))
+    if (j > 0 && is_whitespace(line[j-1]) && quote_char == '\0')
         j--;
     line[j] = '\0';
 }
@@ -103,12 +116,23 @@ char *add_space(char *line)
     int i = 0;
     int j = 0;
     char *buff;
+    char    quote = '\0';
 
     int len = ft_strlen(line) + line_len(line);
     buff = malloc(sizeof(char) * len + 1);
     while(line[i])
-    {
-        if(line[i] == '>')
+    {           
+        if((line[i] == '\'' || line[i] == '"') && quote =='\0')
+        {
+            quote = line[i];
+            buff[j++] = line[i++];
+        }
+        else if(line[i] == quote)
+        {
+            quote = '\0';
+            buff[j++] = line[i++];
+        }
+        else if(line[i] == '>' && quote == '\0')
         {
             buff[j++] = ' ';
             buff[j++] = line[i++];
@@ -116,7 +140,7 @@ char *add_space(char *line)
                 buff[j++] = line[i++];
             buff[j++] = ' ';
         }
-        else if(line[i] == '<')
+        else if(line[i] == '<' && quote == '\0')
         {
             buff[j++] = ' ';
             buff[j++] = line[i++];
@@ -124,7 +148,7 @@ char *add_space(char *line)
                 buff[j++] = line[i++];
             buff[j++] = ' ';
         }
-        else if(line[i] == '|')
+        else if(line[i] == '|' && quote == '\0')
         {
             buff[j++] = ' ';
             buff[j++] = line[i++];

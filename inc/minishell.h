@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/26 17:04:47 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:19:03 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 #define PIPE 1
 #define INPUT 2  // cat < Makefile ======= cat Makefile
 #define OUTPUT 3   // ls > out ==== ls than 7titiha f out
-#define HEREDOC 4  // << delimiter
-#define APPEND 5 
+#define APPEND 4
+#define HEREDOC 5  // << delimiter
 
 
 typedef struct  s_trash
