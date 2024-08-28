@@ -6,7 +6,7 @@
 #    By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 10:57:09 by olaaroub          #+#    #+#              #
-#    Updated: 2024/08/27 10:51:05 by olaaroub         ###   ########.fr        #
+#    Updated: 2024/08/28 21:39:00 by olaaroub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS += -fsanitize=address -g3
 
 SRC = src_parsing/main.c src_parsing/get_env.c src_parsing/trash.c src_parsing/split_mgem7a.c
 SRC += src_parsing/tockenizing.c src_parsing/tockens_list.c src_parsing/check_line.c src_parsing/utils-v1.c
-# SRC += 
+SRC += src_parsing/syntax_error.c
 
 OBJ = $(SRC:.c=.o)
 

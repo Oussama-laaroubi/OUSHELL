@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/28 21:05:13 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:41:24 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int main(int ac, char **av, char **env)
         line = add_space(line);
         tockenizing(line);
         // printf("%s\n",  line);
-        print_tokens(g_data.tocken_list);
-        // syntax_error(line); //TODO
+        // print_tokens(g_data.tocken_list);
+        syntax_error(); //TODO
         ft_free_exit(line, false);
     }
 }

@@ -6,26 +6,39 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:03:36 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/26 17:23:00 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:41:02 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#include "../inc/minishell.h"
 
-int syntax_error(char *line)
+int syntax_error(void)
 {
-    int ret;
-    int i;
     t_tockens   *tmp;
+    t_tockens   *next;
     
-    i = 0;
     tmp = g_data.tocken_list;
+    if(tmp->type == PIPE)
+        return(printf("minishell: syntax error near unexpected token '|'\n"), -1);
     while(tmp)
     {
-        if(tmp->type == PIPE)
+        next = tmp->next;
+        if(next == NULL)
+            if(tmp->type == PIPE)
+                return(printf("minishell: syntax error near unexpected token '|'\n"), -1);
+        if(tmp->type != WORD && tmp->type != PIPE && !tmp->next)
         {
-            
+            printf("minishell: syntax error near ");
+            printf("unexpected token 'newline'\n");
+            return -1;
         }
-        
+        else if((tmp->type != WORD && tmp->type != PIPE && next->type != WORD)
+                || (tmp->type == PIPE && next->type == PIPE))
+        {
+            printf("minishell: syntax error near unexpected token '%s'\n", next->word);
+            return -1;
+        }
+        tmp = next;
     }
+    return 0;
 }
