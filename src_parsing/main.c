@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/27 11:28:09 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:05:13 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	print_tokens(t_tockens *tokens)
 	token = tokens;
 	while (token)
 	{
-		printf("value == %s type == %u\n", token->word, token->type);
+		printf("value == %s type == %u \n", token->word, token->type);
+        // if(token->prev)
+		//     printf("prev value == %s\n", token->prev->word);
 		token = token->next;
 	}
 }

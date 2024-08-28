@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/27 11:19:03 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/28 20:53:38 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_tockens
 {
     char    *word;
     int     type;
+    struct s_tockens    *prev;
     struct s_tockens    *next;
 }               t_tockens;
 
