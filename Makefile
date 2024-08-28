@@ -6,7 +6,7 @@
 #    By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 10:57:09 by olaaroub          #+#    #+#              #
-#    Updated: 2024/08/28 21:39:00 by olaaroub         ###   ########.fr        #
+#    Updated: 2024/08/28 23:31:52 by olaaroub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = minishell
 LIB = libft/libft.a
+
 
 all:  $(NAME)
 

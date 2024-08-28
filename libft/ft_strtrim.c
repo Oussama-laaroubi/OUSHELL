@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static int is_whitespace(int c)
+static int	is_whitespace(int c)
 {
-    return (c == 32 || (c >= 9 && c <= 13));
+	return (c == 32 || (c >= 9 && c <= 13));
 }
 
 char	*ft_strtrim(char const *s1)

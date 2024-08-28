@@ -17,23 +17,23 @@ char	*ft_costume_strchr(const char *str, int c)
 	size_t	i;
 	size_t	j;
 	char	*buff;
-    char    *ret;    
+	char	*ret;
 
 	buff = (char *)str;
 	i = 0;
 	while (i <= ft_strlen(buff))
 	{
 		if (buff[i] == (char)c)
-			break;
+			break ;
 		i++;
 	}
-    ret = malloc(sizeof(char) + i + 1);
-    j = 0;
-    while(j < i)
-    {
-        ret[j] = buff[j];
-        j++;
-    }
-    ret[j] = '\0';
+	ret = malloc(sizeof(char) + i + 1);
+	j = 0;
+	while (j < i)
+	{
+		ret[j] = buff[j];
+		j++;
+	}
+	ret[j] = '\0';
 	return (ret);
 }

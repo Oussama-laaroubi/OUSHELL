@@ -12,65 +12,67 @@
 
 #include "../inc/minishell.h"
 
-void    ft_free_exit(char *line, bool val)
+void	ft_free_exit(char *line, bool val)
 {
-    free_trash(&g_data.trash_list);
-    if(line)
-    {
-        free(line);
-        line = NULL;
-    }
-    if(val)
-        exit(EXIT_SUCCESS);
+	free_trash(&g_data.trash_list);
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
+	if (val)
+		exit(EXIT_SUCCESS);
 }
 
-int is_whitespace(int c)
+int	is_whitespace(int c)
 {
-    return (c == 32 || (c >= 9 && c <= 13));
+	return (c == 32 || (c >= 9 && c <= 13));
 }
-                                    // ls -la> k
-int line_len(char *line)
+// ls -la> k
+int	line_len(char *line)
 {
-    int i = 0;
-    int j = 0;
+	int	i;
+	int	j;
 
-    if(!line)
-        return 0;
-    while(line[i])
-    {
-        if(line[i] == '<')
-        {
-            if(line[i+1] == '<')
-            {
-                j += 2;
-                i += 2;
-            }
-            else
-            {
-                j+= 2;
-                i++;
-            } 
-        }
-        else if(line[i] == '>')
-        {
-            if(line[i+1] == '>')
-            {
-                j += 2;
-                i += 2;
-            }
-            else
-            {
-                j+= 2;
-                i++;
-            }
-        }
-        else if(line[i] == '|')
-        {
-            j+= 2;
-            i++;
-        }
-        else
-            i++;
-    }
-    return j;
+	i = 0;
+	j = 0;
+	if (!line)
+		return (0);
+	while (line[i])
+	{
+		if (line[i] == '<')
+		{
+			if (line[i + 1] == '<')
+			{
+				j += 2;
+				i += 2;
+			}
+			else
+			{
+				j += 2;
+				i++;
+			}
+		}
+		else if (line[i] == '>')
+		{
+			if (line[i + 1] == '>')
+			{
+				j += 2;
+				i += 2;
+			}
+			else
+			{
+				j += 2;
+				i++;
+			}
+		}
+		else if (line[i] == '|')
+		{
+			j += 2;
+			i++;
+		}
+		else
+			i++;
+	}
+	return (j);
 }

@@ -12,87 +12,90 @@
 
 #include "../inc/minishell.h"
 
-static	char	*escape_quotes(char *line)
+static char	*escape_quotes(char *line)
 {
-	int quotes = 0;
-	
-	if(*line == 34)
+	int	quotes;
+
+	quotes = 0;
+	if (*line == 34)
 	{
-		while(*line && quotes != 2)
+		while (*line && quotes != 2)
 		{
-			if(*line == 34)
+			if (*line == 34)
 				quotes++;
 			line++;
 		}
 	}
-	else if(*line == 39)
+	else if (*line == 39)
 	{
-		while(*line && quotes != 2)
+		while (*line && quotes != 2)
 		{
-			if(*line == 39)
+			if (*line == 39)
 				quotes++;
 			line++;
 		}
 	}
-	return line;
+	return (line);
 }
 
-int		word_lenght(char *line)
+int	word_lenght(char *line)
 {
-	int d_quotes = 0;
-	int s_quotes = 0;
-	int i = 0;
-	
-	while(line[i] && !isspace(line[i]))
+	int	d_quotes;
+	int	s_quotes;
+	int	i;
+
+	d_quotes = 0;
+	s_quotes = 0;
+	i = 0;
+	while (line[i] && !isspace(line[i]))
 	{
-		if(line[i] == 34)
+		if (line[i] == 34)
 		{
-			while(line[i])
+			while (line[i])
 			{
-				if(line[i] == 34)
+				if (line[i] == 34)
 					d_quotes++;
 				i++;
-				if(d_quotes % 2 ==0)
-					break;
+				if (d_quotes % 2 == 0)
+					break ;
 			}
 		}
-		else if(line[i] == 39)
+		else if (line[i] == 39)
 		{
-			while(line[i])
+			while (line[i])
 			{
-				if(line[i] == 39)
+				if (line[i] == 39)
 					s_quotes++;
 				i++;
-				if(s_quotes % 2 == 0)
-					break;
+				if (s_quotes % 2 == 0)
+					break ;
 			}
 		}
 		else
 			i++;
 	}
-	return i;
+	return (i);
 }
 
-int count_words(char *line)
+int	count_words(char *line)
 {
 	int	count;
 
 	count = 0;
 	while (*line)
 	{
-        
 		while (*line && isspace(*line))
 			line++;
 		if (*line && !isspace(*line))
 		{
 			count++;
 			while (*line && !isspace(*line))
-            {
-                if(*line == 34 || *line == 39)
+			{
+				if (*line == 34 || *line == 39)
 					line = escape_quotes(line);
 				else
 					line++;
-            }
+			}
 		}
 	}
 	return (count);
@@ -121,20 +124,20 @@ static char	**fill_strings(char *line, char **result, int count)
 	return (result);
 }
 
-char    **split_mgem7a(char *line)
+char	**split_mgem7a(char *line)
 {
-	char **result;
+	char	**result;
 	char	*buff;
-	int count;
+	int		count;
 
-	if(!line)
-		return NULL;
+	if (!line)
+		return (NULL);
 	buff = line;
 	count = count_words(buff);
-	result = (char **)malloc(sizeof(char *) * (count  + 1));
+	result = (char **)malloc(sizeof(char *) * (count + 1));
 	g_data.trash_list = ft_add_trash(&g_data.trash_list, result);
-	if(!result)
-		return(NULL);
+	if (!result)
+		return (NULL);
 	result = fill_strings(line, result, count);
-    return result;
+	return (result);
 }

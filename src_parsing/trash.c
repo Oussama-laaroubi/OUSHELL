@@ -18,7 +18,7 @@ static t_trash	*ft_create_node(void *addr)
 
 	new = (t_trash *)malloc(sizeof(t_trash));
 	if (!new)
-		return NULL;
+		return (NULL);
 	new->address = addr;
 	new->next = NULL;
 	return (new);
@@ -30,9 +30,9 @@ t_trash	*ft_add_trash(t_trash **head, void *addr)
 	t_trash	*temp;
 
 	new = ft_create_node(addr);
-    if(!new)
-        return NULL;
-    if (!*head)
+	if (!new)
+		return (NULL);
+	if (!*head)
 		return (new);
 	temp = *head;
 	while (temp->next != NULL)
@@ -42,16 +42,17 @@ t_trash	*ft_add_trash(t_trash **head, void *addr)
 	return (*head);
 }
 
-void    free_trash(t_trash **head)
+void	free_trash(t_trash **head)
 {
-    t_trash *tmp;
-    if(!head || !*head)
-        return;
-    while(*head)
-    {
-        tmp = *head;
-        *head = (*head)->next;
-        free(tmp->address);
-        free(tmp);
-    }
+	t_trash	*tmp;
+
+	if (!head || !*head)
+		return ;
+	while (*head)
+	{
+		tmp = *head;
+		*head = (*head)->next;
+		free(tmp->address);
+		free(tmp);
+	}
 }

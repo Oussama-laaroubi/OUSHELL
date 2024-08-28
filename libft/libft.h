@@ -79,7 +79,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 //=== ADDED FUNCTIONS ===/
-char	*ft_costume_strchr(const char *str, int c);
+char				*ft_costume_strchr(const char *str, int c);
 int					ft_abs(int n);
 //==== FT_PRINTF ===//
 
