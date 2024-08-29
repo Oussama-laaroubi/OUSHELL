@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:03:36 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/28 21:41:02 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/29 09:57:03 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	syntax_error(void)
 			if (tmp->type == PIPE)
 				return (printf("minishell: syntax error near unexpected token '|'\n"),
 					-1);
-		if (tmp->type != WORD && tmp->type != PIPE && !tmp->next)
+		if (tmp->type != WORD && tmp->type != PIPE && !next)
 		{
 			printf("minishell: syntax error near ");
 			printf("unexpected token 'newline'\n");
