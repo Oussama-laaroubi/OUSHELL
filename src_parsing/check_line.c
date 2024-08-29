@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:18:01 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/27 10:47:44 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:57:52 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ char	*add_space(char *line)
 	i = 0;
 	j = 0;
 	quote = '\0';
+	if(!line)
+		return NULL;
 	len = ft_strlen(line) + line_len(line);
 	buff = malloc(sizeof(char) * len + 1);
 	while (line[i])

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:03:36 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/29 09:57:03 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:59:48 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	syntax_error(void)
 	t_tockens	*next;
 
 	tmp = g_data.tocken_list;
+	if(!tmp)
+		return 0;
 	if (tmp->type == PIPE)
 		return (printf("minishell: syntax error near unexpected token '|'\n"),
 			-1);

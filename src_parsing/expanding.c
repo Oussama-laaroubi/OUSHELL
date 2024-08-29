@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 11:23:51 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/29 13:23:15 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:52:36 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ char *ret_new_word(char *word, char *exp)
 
 void    expanding(void)
 {
-    int i = 0;
-    int j = 0;
-    t_tockens *tmp; // ECHO "HELLO $USER"
+    t_tockens *tmp;
+    int i;
+    int j;
     char buff[2048];
-    buff[0] = '\0';
     
+    buff[0] = '\0';
     tmp = g_data.tocken_list;
     while(tmp)
     {
@@ -100,10 +100,7 @@ void    expanding(void)
                 i++;
         }
         if(buff[0] != '\0')
-        {
             tmp->word = ret_new_word(tmp->word, buff);
-            // printf("=== NEW WORD IS %s ===\n", tmp->word);
-        }
         tmp = tmp->next;
     }
     

@@ -6,13 +6,13 @@
 #    By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 10:57:09 by olaaroub          #+#    #+#              #
-#    Updated: 2024/08/29 13:24:55 by olaaroub         ###   ########.fr        #
+#    Updated: 2024/08/30 00:03:30 by olaaroub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
-# CFLAGS += -fsanitize=address -g3
+CFLAGS += -fsanitize=address -g3
 
 SRC = src_parsing/main.c src_parsing/get_env.c src_parsing/trash.c src_parsing/split_mgem7a.c
 SRC += src_parsing/tockenizing.c src_parsing/tockens_list.c src_parsing/check_line.c src_parsing/utils-v1.c
