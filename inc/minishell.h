@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/03 12:06:42 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:26:43 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_env
 typedef struct s_tockens
 {
 	char				*word;
+	char				**word_after_exp;
 	int					type;
 	struct s_tockens	*prev;
 	struct s_tockens	*next;
@@ -62,6 +63,7 @@ typedef struct s_program
 	t_env				*env_list;
 	bool				double_flag;
 	bool				single_flag;
+	char				**commands;
 }						t_program;
 
 // FUNCTIONS //
@@ -82,6 +84,7 @@ int						line_len(char *line);
 char					*add_space(char *line);
 int						syntax_error(void);
 void    				expand(void);
+void    split_tokens(void);
 
 extern t_program		g_data;
 #endif

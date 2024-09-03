@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/03 12:10:11 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:33:59 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ t_program g_data;
 void print_tokens(t_tockens *tokens)
 {
 	t_tockens *token;
+	int i;
 
 	token = tokens;
 	while (token)
 	{
-		printf("value == %s type == %u \n", token->word, token->type);
-		// if(token->prev)
-		//     printf("prev value == %s\n", token->prev->word);
+		i = 0;
+		printf("--> word is %s\n", token->word);
+		while(token->word_after_exp && token->word_after_exp[i])
+			printf("--> word after expand is %s\n", token->word_after_exp[i++]);
+		
 		token = token->next;
 	}
 }
@@ -60,11 +63,12 @@ int main(int ac, char **av, char **env)
 			ft_free_exit(line, false);
 			continue;
 		}
-		line = add_space(line); // add space between tockens
-		tockenizing(line); // tockenize the line
-		syntax_error(); // check for syntax error
-		expand();	
-		print_tokens(g_data.tocken_list);	
-		ft_free_exit(line, false);//
+		line = add_space(line);
+		tockenizing(line);
+		syntax_error(); 
+		expand();
+		split_tokens();
+		print_tokens(g_data.tocken_list);
+		ft_free_exit(line, false);
 	}
 }

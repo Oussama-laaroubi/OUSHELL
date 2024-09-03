@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:46:31 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/03 12:20:34 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:27:51 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int get_expanded(char *buff, int fd)
     while(tmp)
     {
         if(!ft_strcmp(buff, tmp->name))
-            return(free(buff), write(fd, tmp->value, ft_strlen(tmp->value)));
+            return(write(fd, tmp->value, ft_strlen(tmp->value)));
         tmp = tmp->next;
     }
     return 0;
@@ -69,11 +69,11 @@ void    expand(void)
     while(tmp)
     {
         i = 0;
-        char rand[6];
-        int fd2 = open("/dev/random", O_RDONLY);
-        read(fd2, rand, 5);
-        rand[5] = '\0';
-        close(fd2);
+        // char rand[6];
+        // int fd2 = open("/dev/random", O_RDONLY);
+        // read(fd2, rand, 5);
+        // rand[5] = '\0';
+        // close(fd2);
         fd = open("file.txt", O_CREAT | O_RDWR | O_TRUNC, 0644);
         wrote = 0;
         while(tmp->word && tmp->word[i])
@@ -94,6 +94,7 @@ void    expand(void)
                     wrote += write(fd, "$", 1);
                     wrote += write(fd, buff, ft_strlen(buff));
                 }
+                free(buff);
             }
             else
                 wrote += write(fd, &tmp->word[i++], 1);
@@ -104,7 +105,7 @@ void    expand(void)
         if(tmp->word)
             g_data.trash_list = ft_add_trash(&g_data.trash_list, tmp->word);
         close(fd);
-        unlink(rand);
+        unlink("file.txt");
         tmp = tmp->next;
     }
 }
