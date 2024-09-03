@@ -5,108 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 15:34:43 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/02/18 21:58:59 by olaaroub         ###   ########.fr       */
+/*   Created: 2024/08/06 16:11:50 by hes-safi          #+#    #+#             */
+/*   Updated: 2024/09/03 10:05:42 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*get_new_line(char *stat)
+
+static size_t	ft_strlen_gnl(char *str)
 {
-	int		i;
-	int		is_newline;
-	char	*line;
+	size_t	i;
 
 	i = 0;
-	if (!stat || stat[0] == '\0')
+	while (str[i])
+		i++;
+	return (i);
+}
+
+static char	*ft_strjoin_gnl(char *s1, char *s2)
+{
+	size_t	i;
+	size_t	j;
+	size_t	s1len;
+	size_t	s2len;
+	char	*toreturn;
+
+	if (!s1 || !s2)
 		return (NULL);
-	while (stat[i] != '\n' && stat[i] != '\0')
-		i++;
-	if (stat[i] == '\n')
-		is_newline = 1;
-	line = malloc(sizeof(char) * (i + 2));
-	if (!line)
-		return (free(stat), NULL);
 	i = 0;
-	while (stat[i] != '\n' && stat[i] != '\0')
-	{
-		line[i] = stat[i];
-		i++;
-	}
-	if (is_newline == 1)
-		line[i++] = '\n';
-	line[i] = '\0';
-	return (line);
-}
-
-static char	*get_rest(char *stat)
-{
-	char	*rest;
-	int		j;
-	int		i;
-
 	j = 0;
+	s1len = ft_strlen(s1);
+	s2len = ft_strlen(s2);
+	toreturn = malloc(s1len + s2len + 1);
+	while (s1[i])
+		toreturn[j++] = s1[i++];
 	i = 0;
-	if (!stat || stat[0] == '\0')
-		return (free(stat), NULL);
-	while (stat[j] != '\n' && stat[j] != '\0')
-		j++;
-	if (stat[j] == '\0')
-		return (free(stat), NULL);
-	rest = malloc(sizeof(char) * ((ft_strlen_gnl(stat) - j) + 1));
-	if (!rest)
-		return (free(stat), NULL);
-	j++;
-	while (stat[j])
-	{
-		rest[i] = stat[j];
-		j++;
-		i++;
-	}
-	rest[i] = '\0';
-	return (free(stat), rest);
-}
-
-static char	*get_bytes(char *stat, int fd)
-{
-	ssize_t	readed;
-	char	*tmp;
-	char	*buf;
-
-	buf = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
-	if (!buf)
-		return (free(stat), NULL);
-	readed = 1;
-	tmp = NULL;
-	while (readed > 0)
-	{
-		readed = read(fd, buf, BUFFER_SIZE);
-		if (readed == -1)
-			return (free(buf), free(stat), NULL);
-		buf[readed] = '\0';
-		tmp = ft_strdup_gnl(stat);
-		free(stat);
-		stat = ft_strjoin_gnl(tmp, buf);
-		free(tmp);
-		if (ft_strchr_gnl(buf, '\n'))
-			break ;
-	}
-	free(buf);
-	return (stat);
+	while (s2[i])
+		toreturn[j++] = s2[i++];
+	toreturn[j] = '\0';
+	free(s1);
+	return (toreturn);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stat;
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
 
-	if (fd == INVALID_FD)
-		return (free(stat), NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stat = get_bytes(stat, fd);
-	line = get_new_line(stat);
-	stat = get_rest(stat);
+	line = malloc(sizeof(char) * 2);
+	if (line == NULL)
+		return (NULL);
+	line[0] = '\0';
+	line[1] = '\0';
+	while (read(fd, buffer, 1))
+	{
+		buffer[1] = '\0';
+		line = ft_strjoin_gnl(line, buffer);
+	}
+	if (!ft_strlen_gnl(line))
+	{
+		free(line);
+		return (NULL);
+	}
 	return (line);
 }
+
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*line;
+
+// 	fd = open("Infile.txt", O_RDONLY);
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 			break ;
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// }

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/29 11:54:12 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:06:42 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define WORD 0
 # define PIPE 1
-# define INPUT 2  // cat < Makefile ======= cat Makefile
+# define INPUT 2  // cat < Makefile cat Makefile
 # define OUTPUT 3 // ls > out ==== ls than 7titiha f out
 # define APPEND 4
 # define HEREDOC 5 // << delimiter
@@ -60,9 +60,12 @@ typedef struct s_program
 	t_tockens			*tocken_list;
 	t_trash				*trash_list;
 	t_env				*env_list;
+	bool				double_flag;
+	bool				single_flag;
 }						t_program;
 
 // FUNCTIONS //
+
 void					get_env(t_env **env_list, char **env);
 t_trash					*ft_add_trash(t_trash **head, void *addr);
 void					free_trash(t_trash **head);
@@ -78,7 +81,7 @@ int						is_whitespace(int c);
 int						line_len(char *line);
 char					*add_space(char *line);
 int						syntax_error(void);
-void    				expanding(void);
+void    				expand(void);
 
 extern t_program		g_data;
 #endif

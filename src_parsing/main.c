@@ -6,17 +6,17 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/30 00:03:50 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:10:11 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_program	g_data;
+t_program g_data;
 
-void	print_tokens(t_tockens *tokens)
+void print_tokens(t_tockens *tokens)
 {
-	t_tockens	*token;
+	t_tockens *token;
 
 	token = tokens;
 	while (token)
@@ -28,16 +28,18 @@ void	print_tokens(t_tockens *tokens)
 	}
 }
 
-void	init_data(void)
+void init_data(void)
 {
 	g_data.env_list = NULL;
 	g_data.trash_list = NULL;
 	g_data.tocken_list = NULL;
+	g_data.double_flag = false;
+	g_data.single_flag = false;
 }
 
-int	main(int ac, char **av, char **env)
+int main(int ac, char **av, char **env)
 {
-	char	*line;
+	char *line;
 
 	(void)ac;
 	(void)av;
@@ -46,7 +48,7 @@ int	main(int ac, char **av, char **env)
 	{
 		init_data();
 		get_env(&g_data.env_list, env);
-		line = readline("Minihell==>>$ ");
+		line = readline("Minihell==>>$ ");//
 		if (line && *line)
 			add_history(line);
 		if (line && !ft_strcmp(line, "exit"))
@@ -56,13 +58,13 @@ int	main(int ac, char **av, char **env)
 		{
 			printf("Error: Unclosed quotes detected.\n");
 			ft_free_exit(line, false);
-			continue ;
+			continue;
 		}
-		line = add_space(line);
-		tockenizing(line);
-		syntax_error(); // DONE
-		expanding();
-		print_tokens(g_data.tocken_list);
-		ft_free_exit(line, false);
+		line = add_space(line); // add space between tockens
+		tockenizing(line); // tockenize the line
+		syntax_error(); // check for syntax error
+		expand();	
+		print_tokens(g_data.tocken_list);	
+		ft_free_exit(line, false);//
 	}
 }

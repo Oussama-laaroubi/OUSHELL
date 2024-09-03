@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 11:23:51 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/29 23:52:36 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:06:33 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char *ret_new_word(char *word, char *exp)
     g_data.trash_list = ft_add_trash(&g_data.trash_list, new_word);
     env_val = mini_getenv(exp);
     if(!env_val)
-        env_val = exp;
+        env_val = NULL;
     else
         g_data.trash_list = ft_add_trash(&g_data.trash_list, env_val);
     while(word[i])
@@ -61,7 +61,7 @@ char *ret_new_word(char *word, char *exp)
         if(word[i] && word[i] == '$')
         {
             i++;
-            while(env_val[j])
+            while(env_val && env_val[j])
                 new_word[k++] = env_val[j++];
             while(ft_isalnum(word[i]))
                 i++;
@@ -72,6 +72,7 @@ char *ret_new_word(char *word, char *exp)
     new_word[k] = '\0';
     return new_word;
 }
+
 
 void    expanding(void)
 {
@@ -94,7 +95,6 @@ void    expanding(void)
                 while(tmp->word[i] && ft_isalnum(tmp->word[i]))
                     buff[j++] = tmp->word[i++];
                 buff[j] = '\0';
-                break;
             }
             else
                 i++;

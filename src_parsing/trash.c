@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:53:19 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/08 13:53:49 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/02 21:55:10 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	free_trash(t_trash **head)
 	{
 		tmp = *head;
 		*head = (*head)->next;
-		free(tmp->address);
+		if(tmp->address)
+			free(tmp->address);
 		free(tmp);
 	}
 }

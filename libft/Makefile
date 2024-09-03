@@ -23,7 +23,7 @@ SRCS += ft_memcpy.c ft_memmove.c ft_strchr.c ft_strrchr.c ft_memchr.c ft_memcmp.
 SRCS += ft_substr.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_split.c ft_strmapi.c ft_striteri.c
 SRCS += ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putchar_fd.c ft_calloc.c ft_strdup.c ft_strcmp.c
 #=== ADDED ===#
-SRCS += ft_costume_strchr.c ft_abs.c
+SRCS += ft_abs.c ft_costume_strchr.c
 #=== LIBFT_BONUS ===#
 B_SRCS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c
 B_SRCS += ft_lstiter_bonus.c ft_lstmap_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c
@@ -31,11 +31,10 @@ B_OBJ = $(B_SRCS:.c=.o)
 
 #=== FT_PRINTF ===#
 
-SRCS += ft_printf.c ft_putchar.c ft_putstr.c ft_putptr.c ft_putnbr_base.c ft_placeholder.c ft_putptr_base.c
 
 #=== GET_NEXT_LINE ===#
 
-SRCS += get_next_line_utils.c get_next_line.c
+SRCS +=  get_next_line.c
 
 OBJ = $(SRCS:.c=.o)
 

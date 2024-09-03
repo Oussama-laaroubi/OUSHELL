@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:24:14 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/16 21:18:17 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:05:30 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,21 @@ int					ft_putchar(int c);
 int					ft_putptr_base(unsigned long n, int base, char c);
 
 //==== GET_NEXT_LINE ===//
+char	*get_next_line(int fd);
+
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif // BUFFER_SIZE
 
 # ifndef INVALID_FD
 #  define INVALID_FD -77
 # endif // INVALID_FD
 
-unsigned int		ft_strlen_gnl(char *str);
-char				*ft_strdup_gnl(char *s1);
-char				*ft_strjoin_gnl(char *s1, char *s2);
-char				*ft_strchr_gnl(char *str, int c);
+// unsigned int		ft_strlen_gnl(char *str);
+// char				*ft_strdup_gnl(char *s1);
+// char				*ft_strjoin_gnl(char *s1, char *s2);
+// char				*ft_strchr_gnl(char *str, int c);
 char				*get_next_line(int fd);
 
 #endif
