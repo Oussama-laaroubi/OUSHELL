@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:55:39 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/03 14:22:12 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/08 20:42:53 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static t_tockens	*ft_create_node(char *word, int type)
 	new->type = type;
 	new->word_after_exp = NULL;
 	new->next = NULL;
-	new->prev = NULL;
 	return (new);
 }
 
@@ -43,6 +42,5 @@ t_tockens	*ft_add_tocken(t_tockens **head, char *word, int type)
 		temp = temp->next;
 	temp->next = new;
 	new->next = NULL;
-	new->prev = temp;
 	return (*head);
 }

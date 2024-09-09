@@ -6,11 +6,32 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:00:42 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/03 14:21:15 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/08 21:03:53 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+
+
+static void    refill_tokens(void)
+{
+    t_tockens   *tmp;
+    int         i;
+
+    tmp = g_data.tocken_list;
+    g_data.tocken_list = NULL;
+    while(tmp)
+    {
+        i = 0;
+        while(tmp->word_after_exp && tmp->word_after_exp[i])
+        {
+            g_data.tocken_list = ft_add_tocken(&g_data.tocken_list, tmp->word_after_exp[i], tmp->type);
+            i++;
+        }
+        tmp = tmp->next;
+    }
+}
 
 void    split_tokens(void)
 {
@@ -22,4 +43,5 @@ void    split_tokens(void)
         tmp->word_after_exp = split_mgem7a(tmp->word);
         tmp = tmp->next;
     }
+    refill_tokens();
 }

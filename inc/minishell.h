@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/03 16:26:43 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/09 11:09:55 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,38 @@ typedef struct s_tockens
 	char				*word;
 	char				**word_after_exp;
 	int					type;
-	struct s_tockens	*prev;
 	struct s_tockens	*next;
 }						t_tockens;
 
-typedef struct s_program
+typedef struct	s_redir
 {
-	t_tockens			*tocken_list;
+	int					type;
+	char				*file_name;
+	struct s_redir		*next;
+} 						t_redir;
+
+typedef struct	s_command
+{
+	char 				**cmd;
+	t_redir				*red;
+	struct s_command	*next;
+}						t_command;
+
+
+
+typedef struct	s_program
+{
 	t_trash				*trash_list;
 	t_env				*env_list;
+	t_tockens			*tocken_list;
+	t_command			*command_list;
 	bool				double_flag;
 	bool				single_flag;
-	char				**commands;
 }						t_program;
 
 // FUNCTIONS //
+
+
 
 void					get_env(t_env **env_list, char **env);
 t_trash					*ft_add_trash(t_trash **head, void *addr);
@@ -84,7 +101,13 @@ int						line_len(char *line);
 char					*add_space(char *line);
 int						syntax_error(void);
 void    				expand(void);
-void    split_tokens(void);
+void				    split_tokens(void);
+
+
+
+t_redir	*ft_add_redir(t_redir **head, char *file_name, int type);
+t_command	*ft_add_command(t_command **head, char **commands, t_redir *redir);
+void    fill_command_list(void);
 
 extern t_program		g_data;
 #endif
