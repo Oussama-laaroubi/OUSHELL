@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/09 14:21:29 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:15:48 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void print_tokens()
 	{
 		i = 0;
 		printf("=== COMMANDS ===\n");
-		while (token->cmd[i])
+		while (token->cmd && token->cmd[i])
 		{
 			printf(" command %i is %s\n", i, token->cmd[i]);
 			i++;
@@ -48,6 +48,8 @@ void init_data(void)
 	g_data.tocken_list = NULL;
 	g_data.double_flag = false;
 	g_data.single_flag = false;
+	g_data.i = 0;
+	g_data.j = 0;
 }
 
 int main(int ac, char **av, char **env)
@@ -57,6 +59,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	line = NULL;
+	g_data.ret_value = 0;
 	while (1)
 	{
 		init_data();
@@ -70,6 +73,7 @@ int main(int ac, char **av, char **env)
 		if (!valid_quotes(line))
 		{
 			printf("Error: Unclosed quotes detected.\n");
+			g_data.ret_value = 2;
 			ft_free_exit(line, false);
 			continue;
 		}
@@ -80,16 +84,6 @@ int main(int ac, char **av, char **env)
 		split_tokens();
 		fill_command_list();
 		print_tokens();
-		// while(g_data.command_list)
-		// {
-		// 	int i = 0;
-		// 	while(g_data.command_list->cmd[i])
-		// 	{
-		// 		printf("=== %s ===\n", g_data.command_list->cmd[i]);
-		// 		i++;
-		// 	}
-		// 	g_data.command_list = g_data.command_list->next;
-		// }
 		ft_free_exit(line, false);
 	}
 }

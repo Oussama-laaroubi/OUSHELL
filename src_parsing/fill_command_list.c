@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:24:13 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/09 15:05:55 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:36:52 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,32 @@ static int len_until_pipe(t_tockens *temp)
     return i;
 }
 
+static char *trim_quotes(char *word)
+{
+    char *ret;
+    char quote;
+
+    g_data.i = 0;
+    g_data.j = 0;
+    ret = malloc(sizeof(char) * (ft_strlen(word) + 1));
+    g_data.trash_list = ft_add_trash(&g_data.trash_list, ret);
+    while (word[g_data.i])
+    {
+        if (word[g_data.i] == '"' || word[g_data.i] == '\'')
+        {
+            quote = word[g_data.i++];
+            while (word[g_data.i] && word[g_data.i] != quote)
+                ret[g_data.j++] = word[g_data.i++];
+            if (word[g_data.i] == quote)
+                g_data.i++;
+        }
+         else
+            ret[g_data.j++] = word[g_data.i++];
+    }
+    ret[g_data.j] = '\0';
+    return ret;
+}
+
 static void fill_commands_redirs(t_tockens **temp, t_redir **redir, char **commands)
 {
     int i;
@@ -35,11 +61,18 @@ static void fill_commands_redirs(t_tockens **temp, t_redir **redir, char **comma
     {
         if((*temp)->type == INPUT || (*temp)->type == OUTPUT || (*temp)->type == APPEND || (*temp)->type == HEREDOC)
         {
-            *redir = ft_add_redir(redir, (*temp)->next->word, (*temp)->type);
+            if((*temp)->next->ambiguous == false)
+                *redir = ft_add_redir(redir, (*temp)->next->word, (*temp)->type);
+            else
+            {
+                printf("minishell: %s: AMBIGUOUS REDIRECT\n", (*temp)->next->word);
+                break;
+            }
             (*temp) = (*temp)->next->next;
         }
         else
         {
+            (*temp)->word = trim_quotes((*temp)->word);
             commands[i] = ft_strdup((*temp)->word);
             g_data.trash_list = ft_add_trash(&g_data.trash_list, commands[i++]);
             (*temp) = (*temp)->next;

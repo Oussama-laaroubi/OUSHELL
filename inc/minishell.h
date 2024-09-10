@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/09 11:09:55 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:15:30 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ typedef struct s_tockens
 	char				*word;
 	char				**word_after_exp;
 	int					type;
+	bool				ambiguous;
+	char				*dollar;
 	struct s_tockens	*next;
+	struct s_tockens	*prev;
 }						t_tockens;
 
 typedef struct	s_redir
@@ -79,6 +82,9 @@ typedef struct	s_program
 	t_command			*command_list;
 	bool				double_flag;
 	bool				single_flag;
+	int					ret_value;
+	int 				i;
+	int					j;
 }						t_program;
 
 // FUNCTIONS //
@@ -92,7 +98,7 @@ int						count_words(char *line);
 int						word_lenght(char *line);
 char					**split_mgem7a(char *line);
 void					tockenizing(char *line);
-t_tockens				*ft_add_tocken(t_tockens **head, char *word, int type);
+t_tockens				*ft_add_tocken(t_tockens **head, char *word, int type, bool ambg);
 void					ft_white_spaces(char *line);
 int						valid_quotes(char *line);
 void					ft_free_exit(char *line, bool exit);

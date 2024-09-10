@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 11:49:20 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/21 14:35:13 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:09:05 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	tockenizing(char *line)
 	while (res[i])
 	{
 		type = check_type(res[i]);
-		g_data.tocken_list = ft_add_tocken(&g_data.tocken_list, res[i], type);
+		g_data.tocken_list = ft_add_tocken(&g_data.tocken_list, res[i], type, false);
 		i++;
 	}
 }

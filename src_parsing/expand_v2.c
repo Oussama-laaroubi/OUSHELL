@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:46:31 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/03 14:27:51 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/10 22:33:39 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void    check_master_quotes(bool *double_flag, bool *single_flag, char c)
         *single_flag = true;
     else if(c == '\'' && *single_flag == true && *double_flag == false)
         *single_flag = false;
-    
-        
+
+
 }
 
 int check_env_name(char *buff)
-{   
+{
     t_env   *tmp;
-    
+
     tmp = g_data.env_list;
     while(tmp)
     {
@@ -38,13 +38,13 @@ int check_env_name(char *buff)
         tmp = tmp->next;
     }
     return -1;
-    
+
 }
 
 int get_expanded(char *buff, int fd)
 {
     t_env   *tmp;
-    
+
     tmp = g_data.env_list;
     while(tmp)
     {
@@ -53,6 +53,26 @@ int get_expanded(char *buff, int fd)
         tmp = tmp->next;
     }
     return 0;
+}
+
+static void check_ambiguous(t_tockens **tmp)
+{
+    char    **check;
+
+    if(!(*tmp)->word || (*tmp)->word[0] == '\0')
+    {
+        (*tmp)->ambiguous = true;
+        (*tmp)->word = (*tmp)->dollar;
+    }
+    else
+    {
+        check= split_mgem7a((*tmp)->word);
+        if(check[1] != NULL)
+        {
+            (*tmp)->ambiguous = true;
+            (*tmp)->word = (*tmp)->dollar;
+        }
+    }
 }
 
 void    expand(void)
@@ -69,23 +89,24 @@ void    expand(void)
     while(tmp)
     {
         i = 0;
-        // char rand[6];
-        // int fd2 = open("/dev/random", O_RDONLY);
-        // read(fd2, rand, 5);
-        // rand[5] = '\0';
-        // close(fd2);
         fd = open("file.txt", O_CREAT | O_RDWR | O_TRUNC, 0644);
         wrote = 0;
         while(tmp->word && tmp->word[i])
         {
             check_master_quotes(&g_data.double_flag, &g_data.single_flag, tmp->word[i]);
-            if(tmp->word[i] == '$')
+            if(tmp->word[i] == '$' && ((tmp->prev && tmp->prev->type != HEREDOC) || !tmp->prev))
             {
-                start = ++i;
+                if(tmp->word[++i] =='?')
+                {
+                    ft_putstr_fd(ft_itoa(g_data.ret_value), fd);
+                    i++;
+                }
+                start = i;
                 while(tmp->word[i] && ft_isalnum(tmp->word[i]))
                     i++;
                 end = i ;
                 buff = ft_substr(tmp->word, start, end - start);
+                tmp->dollar = ft_strjoin("$", buff);
                 if(check_env_name(buff) == 1 && ((g_data.double_flag == false && g_data.single_flag == false)
                     || (g_data.double_flag == true )))
                     wrote += get_expanded(buff, fd);
@@ -102,6 +123,7 @@ void    expand(void)
         close(fd);
         fd = open("file.txt", O_RDONLY);
         tmp->word = get_next_line(fd);
+        check_ambiguous(&tmp);
         if(tmp->word)
             g_data.trash_list = ft_add_trash(&g_data.trash_list, tmp->word);
         close(fd);
