@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:46:31 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/10 22:33:39 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:02:56 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ int get_expanded(char *buff, int fd)
     return 0;
 }
 
-static void check_ambiguous(t_tockens **tmp)
+static void check_ambiguous(t_tockens *tmp)
 {
     char    **check;
 
-    if(!(*tmp)->word || (*tmp)->word[0] == '\0')
+    if(!tmp->word || tmp->word[0] == '\0')
     {
-        (*tmp)->ambiguous = true;
-        (*tmp)->word = (*tmp)->dollar;
+        tmp->ambiguous = true;
+        // (*tmp)->word = (*tmp)->dollar;
     }
     else
     {
-        check= split_mgem7a((*tmp)->word);
+        check= split_mgem7a(tmp->word);
         if(check[1] != NULL)
         {
-            (*tmp)->ambiguous = true;
-            (*tmp)->word = (*tmp)->dollar;
+            tmp->ambiguous = true;
+            // (*tmp)->word = (*tmp)->dollar;
         }
     }
 }
@@ -110,7 +110,12 @@ void    expand(void)
                 if(check_env_name(buff) == 1 && ((g_data.double_flag == false && g_data.single_flag == false)
                     || (g_data.double_flag == true )))
                     wrote += get_expanded(buff, fd);
-                else if(check_env_name(buff) == 1)
+                else if(check_env_name(buff) == 1 && ((g_data.double_flag == false && g_data.single_flag == true)))
+                {
+                    wrote += write(fd, "$", 1);
+                    wrote += write(fd, buff, ft_strlen(buff));
+                }
+                else if(check_env_name(buff) == -1 && (g_data.single_flag == true && g_data.double_flag == false))
                 {
                     wrote += write(fd, "$", 1);
                     wrote += write(fd, buff, ft_strlen(buff));
@@ -123,7 +128,7 @@ void    expand(void)
         close(fd);
         fd = open("file.txt", O_RDONLY);
         tmp->word = get_next_line(fd);
-        check_ambiguous(&tmp);
+        check_ambiguous(tmp);
         if(tmp->word)
             g_data.trash_list = ft_add_trash(&g_data.trash_list, tmp->word);
         close(fd);

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:24:13 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/10 22:36:52 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:15:03 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char *trim_quotes(char *word)
     return ret;
 }
 
-static void fill_commands_redirs(t_tockens **temp, t_redir **redir, char **commands)
+static int fill_commands_redirs(t_tockens **temp, t_redir **redir, char **commands)
 {
     int i;
 
@@ -61,12 +61,15 @@ static void fill_commands_redirs(t_tockens **temp, t_redir **redir, char **comma
     {
         if((*temp)->type == INPUT || (*temp)->type == OUTPUT || (*temp)->type == APPEND || (*temp)->type == HEREDOC)
         {
-            if((*temp)->next->ambiguous == false)
+            if( (*temp)->next && (*temp)->next->ambiguous == false)
                 *redir = ft_add_redir(redir, (*temp)->next->word, (*temp)->type);
-            else
+            else if((*temp)->next)
             {
-                printf("minishell: %s: AMBIGUOUS REDIRECT\n", (*temp)->next->word);
-                break;
+                printf("minishell: %s: AMBIGUOUS REDIRECT\n", (*temp)->next->dollar);
+                commands[i] = NULL;
+                while((*temp) && (*temp)->type != PIPE)
+                    (*temp) = (*temp)->next;
+                return -1;
             }
             (*temp) = (*temp)->next->next;
         }
@@ -79,6 +82,7 @@ static void fill_commands_redirs(t_tockens **temp, t_redir **redir, char **comma
         }
     }
     commands[i] = 0;
+    return 0;
 }
 
 void    fill_command_list(void)
@@ -95,8 +99,10 @@ void    fill_command_list(void)
         commands = (char **)malloc(sizeof(char *) * (len + 1));
         g_data.trash_list = ft_add_trash(&g_data.trash_list, commands);
         redir = NULL;
-        fill_commands_redirs(&temp, &redir, commands);
-        g_data.command_list = ft_add_command(&g_data.command_list, commands, redir);
+        if(fill_commands_redirs(&temp, &redir, commands) == -1)
+            continue;
+        else
+            g_data.command_list = ft_add_command(&g_data.command_list, commands, redir);
         if(temp)
             temp = temp->next;
     }

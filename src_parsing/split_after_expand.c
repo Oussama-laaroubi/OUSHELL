@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:00:42 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/10 22:09:25 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:12:55 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void    refill_tokens(void)
         i = 0;
         while(tmp->word_after_exp && tmp->word_after_exp[i])
         {
-            g_data.tocken_list = ft_add_tocken(&g_data.tocken_list, tmp->word_after_exp[i], tmp->type, tmp->ambiguous);
+            g_data.tocken_list = ft_add_tocken(tmp->word_after_exp[i], tmp->type, tmp->ambiguous, tmp->dollar);
             i++;
         }
         tmp = tmp->next;
@@ -40,7 +40,10 @@ void    split_tokens(void)
     tmp = g_data.tocken_list;
     while(tmp)
     {
-        tmp->word_after_exp = split_mgem7a(tmp->word);
+        if(!tmp->word && (tmp->dollar && tmp->dollar[0] != '\0'))
+            tmp->word_after_exp = split_mgem7a(tmp->dollar);
+        else
+            tmp->word_after_exp = split_mgem7a(tmp->word);
         tmp = tmp->next;
     }
     refill_tokens();

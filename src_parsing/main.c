@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/10 19:15:48 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:14:05 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void print_tokens()
 	while (token)
 	{
 		i = 0;
-		printf("=== COMMANDS ===\n");
+		// printf("=== COMMANDS ===\n");
 		while (token->cmd && token->cmd[i])
 		{
 			printf(" command %i is %s\n", i, token->cmd[i]);
 			i++;
 		}
-		printf("=== REDIRS ===\n");
+		// printf("=== REDIRS ===\n");
 		while(token->red)
 		{
 			printf(" type is %d file name is %s\n", token->red->type, token->red->file_name);
@@ -37,6 +37,8 @@ void print_tokens()
 		}
 		token = token->next;
 		printf("========================================================\n");
+		// printf("token is %s , %d, dollar is %s\n", token->word, token->ambiguous, token->dollar);
+		// token = token->next;
 	}
 }
 

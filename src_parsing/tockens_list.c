@@ -6,13 +6,13 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:55:39 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/10 22:18:05 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:53:19 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static t_tockens	*ft_create_node(char *word, int type, bool ambg)
+static t_tockens	*ft_create_node(char *word, int type, bool ambg, char *dollar)
 {
 	t_tockens	*new;
 
@@ -24,27 +24,27 @@ static t_tockens	*ft_create_node(char *word, int type, bool ambg)
 	new->type = type;
 	new->word_after_exp = NULL;
 	new->ambiguous = ambg;
-	new->dollar = NULL;
+	new->dollar = dollar;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
 }
 
-t_tockens	*ft_add_tocken(t_tockens **head, char *word, int type, bool ambg)
+t_tockens	*ft_add_tocken(char *word, int type, bool ambg, char *dollar)
 {
 	t_tockens *new;
 	t_tockens *temp;
 
-	new = ft_create_node(word, type, ambg);
+	new = ft_create_node(word, type, ambg, dollar);
 	if (!new)
 		return (NULL);
-	if (!*head)
+	if (!g_data.tocken_list)
 		return (new);
-	temp = *head;
+	temp = g_data.tocken_list;
 	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = new;
 	new->next = NULL;
 	new->prev = temp;
-	return (*head);
+	return (g_data.tocken_list);
 }
