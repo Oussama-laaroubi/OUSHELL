@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:24:13 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/15 19:15:03 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:58:42 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,23 @@ static int len_until_pipe(t_tockens *temp)
 {
     t_tockens *tmp;
     int i = 0;
+    int j;
 
     tmp = temp;
     while(tmp && tmp->type != PIPE)
     {
+        if(tmp->word_after_exp && tmp->word_after_exp[1])
+        {
+            j = 0;
+            while(tmp->word_after_exp[j])
+            {
+                j++;
+                i++;
+            }
+        }
+        else
+            i++;
         tmp = tmp->next;
-        i++;
     }
     return i;
 }
@@ -33,6 +44,8 @@ static char *trim_quotes(char *word)
 
     g_data.i = 0;
     g_data.j = 0;
+    if(!word)
+        return NULL;
     ret = malloc(sizeof(char) * (ft_strlen(word) + 1));
     g_data.trash_list = ft_add_trash(&g_data.trash_list, ret);
     while (word[g_data.i])
@@ -55,6 +68,7 @@ static char *trim_quotes(char *word)
 static int fill_commands_redirs(t_tockens **temp, t_redir **redir, char **commands)
 {
     int i;
+    int j;
 
     i = 0;
     while(*temp && (*temp)->type != PIPE)
@@ -75,9 +89,21 @@ static int fill_commands_redirs(t_tockens **temp, t_redir **redir, char **comman
         }
         else
         {
-            (*temp)->word = trim_quotes((*temp)->word);
-            commands[i] = ft_strdup((*temp)->word);
-            g_data.trash_list = ft_add_trash(&g_data.trash_list, commands[i++]);
+            if((*temp)->word_after_exp && (*temp)->word_after_exp[1] != NULL)
+            {
+                j = 0;
+                while((*temp)->word_after_exp[j])
+                {
+                    commands[i] = ft_strdup(trim_quotes((*temp)->word_after_exp[j++]));
+                    g_data.trash_list = ft_add_trash(&g_data.trash_list, commands[i++]);
+                }
+            }
+            else
+            {
+                (*temp)->word = trim_quotes((*temp)->word);
+                commands[i] = ft_strdup((*temp)->word);
+                g_data.trash_list = ft_add_trash(&g_data.trash_list, commands[i++]);
+            }
             (*temp) = (*temp)->next;
         }
     }

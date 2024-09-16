@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:46:31 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/15 19:02:56 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:30:46 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static void check_ambiguous(t_tockens *tmp)
     if(!tmp->word || tmp->word[0] == '\0')
     {
         tmp->ambiguous = true;
-        // (*tmp)->word = (*tmp)->dollar;
+        // tmp->word = ft_strdup("");
+        // g_data.trash_list = ft_add_trash(&g_data.trash_list, tmp->word);
     }
     else
     {
@@ -70,7 +71,8 @@ static void check_ambiguous(t_tockens *tmp)
         if(check[1] != NULL)
         {
             tmp->ambiguous = true;
-            // (*tmp)->word = (*tmp)->dollar;
+            // tmp->word = ft_strdup("");
+            // g_data.trash_list = ft_add_trash(&g_data.trash_list, tmp->word);
         }
     }
 }
@@ -107,6 +109,7 @@ void    expand(void)
                 end = i ;
                 buff = ft_substr(tmp->word, start, end - start);
                 tmp->dollar = ft_strjoin("$", buff);
+                g_data.trash_list = ft_add_trash(&g_data.trash_list, tmp->dollar);
                 if(check_env_name(buff) == 1 && ((g_data.double_flag == false && g_data.single_flag == false)
                     || (g_data.double_flag == true )))
                     wrote += get_expanded(buff, fd);
