@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/15 18:54:37 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/16 22:10:56 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define OUTPUT 3 // ls > out ==== ls than 7titiha f out
 # define APPEND 4
 # define HEREDOC 5 // << delimiter
+# define AMBIG 6
 
 typedef struct s_trash
 {

@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:24:13 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/16 15:58:42 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/16 22:11:18 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int fill_commands_redirs(t_tockens **temp, t_redir **redir, char **comman
             else if((*temp)->next)
             {
                 printf("minishell: %s: AMBIGUOUS REDIRECT\n", (*temp)->next->dollar);
+                *redir = ft_add_redir(redir, NULL, AMBIG);
                 commands[i] = NULL;
                 while((*temp) && (*temp)->type != PIPE)
                     (*temp) = (*temp)->next;
@@ -125,10 +126,9 @@ void    fill_command_list(void)
         commands = (char **)malloc(sizeof(char *) * (len + 1));
         g_data.trash_list = ft_add_trash(&g_data.trash_list, commands);
         redir = NULL;
-        if(fill_commands_redirs(&temp, &redir, commands) == -1)
-            continue;
-        else
-            g_data.command_list = ft_add_command(&g_data.command_list, commands, redir);
+        fill_commands_redirs(&temp, &redir, commands);
+            // continue;
+        g_data.command_list = ft_add_command(&g_data.command_list, commands, redir);
         if(temp)
             temp = temp->next;
     }
