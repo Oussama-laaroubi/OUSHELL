@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/16 22:11:55 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:10:16 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void print_tokens()
 			printf(" command %i is '%s'\n", i, token->cmd[i]);
 			i++;
 		}
-		while(token->red)
+		while (token->red)
 		{
 			printf(" type is %d file name is %s\n", token->red->type, token->red->file_name);
 			token->red = token->red->next;
@@ -79,7 +79,12 @@ int main(int ac, char **av, char **env)
 		}
 		line = add_space(line);
 		tockenizing(line);
-		syntax_error();
+		if (syntax_error() == -1)
+		{
+			g_data.ret_value = 2;
+			ft_free_exit(line, false);
+			continue;
+		}
 		expand();
 		split_tokens();
 		fill_command_list();

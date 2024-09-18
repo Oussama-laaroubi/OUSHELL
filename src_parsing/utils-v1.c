@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 21:58:37 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/08/25 22:13:49 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:02:05 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_free_exit(char *line, bool val)
 {
 	free_trash(&g_data.trash_list);
+	g_data.ret_value = 0;
 	if (line)
 	{
 		free(line);

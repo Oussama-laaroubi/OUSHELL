@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:45:40 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/16 22:10:56 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:08:27 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct	s_program
 	bool				double_flag;
 	bool				single_flag;
 	int					ret_value;
+	int					last_ret_value;
 	int 				i;
 	int					j;
 }						t_program;
