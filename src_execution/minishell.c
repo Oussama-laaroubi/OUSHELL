@@ -6,12 +6,11 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:08:28 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/27 18:05:41 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:09:40 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
+#include "./include/minishell.h"
 
 
 // size_t double_str_len(char **str)

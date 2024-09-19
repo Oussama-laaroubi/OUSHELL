@@ -6,11 +6,11 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:16:24 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/27 18:06:06 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:09:21 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "./include/minishell.h"
 
 size_t double_str_len(char **str)
 {
@@ -56,7 +56,7 @@ void ft_echo(char **args)
     }
     while (i < args_n)
     {
-		write (1, args[i], strlen(args[i]));
+		write (1, args[i], ft_strlen(args[i]));
         if (i < args_n - 1)
             write(1, " ", 1);
 		i++;
