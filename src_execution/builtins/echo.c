@@ -6,7 +6,7 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:16:24 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/27 19:09:21 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:51:24 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void ft_echo(char **args)
 		i++;
     }
     if (newline)
-        printf("\n");          
+        write(1, "\n", 1);          
 }

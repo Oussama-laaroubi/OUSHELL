@@ -6,7 +6,7 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:50:34 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/27 19:09:47 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:04:54 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void print_working_dir()
     str = getcwd(buff, sizeof(buff));
     if (NULL == str)
         perror("error getcwd");
-    printf("%s\n", str);      
+    printf("%s\n", str);
 }

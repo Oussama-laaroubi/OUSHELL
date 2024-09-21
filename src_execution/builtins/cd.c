@@ -6,8 +6,10 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 12:16:54 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/08/27 19:09:44 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:46:56 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/minishell.h"
+
+
