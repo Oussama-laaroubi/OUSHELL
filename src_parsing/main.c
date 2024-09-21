@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/18 23:10:16 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:28:48 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ int main(int ac, char **av, char **env)
 	{
 		init_data();
 		get_env(&g_data.env_list, env);
+		// while(g_data.env_list)
+		// {
+		// 	printf("name is = %s ==== value is %s \n", g_data.env_list->name, g_data.env_list->value);
+		// 	g_data.env_list = g_data.env_list->next;
+		// }
 		line = readline("Minihell==>>$ ");
 		if (line && *line)
 			add_history(line);
