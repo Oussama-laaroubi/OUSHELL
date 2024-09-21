@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 13:50:34 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/09/19 21:04:54 by ouboukou         ###   ########.fr       */
+/*   Created: 2024/08/27 18:01:01 by ouboukou          #+#    #+#             */
+/*   Updated: 2024/09/19 15:38:31 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/minishell.h"
+# ifndef MINISHELL_H
+# define MINISHELL_H
+#include "libft.h"
 
-void print_working_dir()
-{
-    char buff[PATH_MAX];
-    char *str;
-    
-    str = getcwd(buff, sizeof(buff));
-    if (NULL == str)
-        perror("error getcwd");
-    printf("%s\n", str);
-}
+// main
+#include <readline/history.h>
+#include <readline/readline.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdbool.h>
+#include <fcntl.h>
+
+#define MAX_ARGS 100
+
+// pwd
+#include <linux/limits.h>
+#define PATH_MAX 4096
+
+#include <stdbool.h>
+
+void    ft_echo(char **args);
+
+#endif
