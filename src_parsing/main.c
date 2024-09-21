@@ -6,7 +6,7 @@
 /*   By: olaaroub <olaaroub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:44:05 by olaaroub          #+#    #+#             */
-/*   Updated: 2024/09/20 23:28:48 by olaaroub         ###   ########.fr       */
+/*   Updated: 2024/09/21 22:06:20 by olaaroub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void print_tokens()
 		}
 		token = token->next;
 		printf("========================================================\n");
-		// printf("token is %s , %d, dollar is %s\n", token->word, token->ambiguous, token->dollar);
-		// token = token->next;
 	}
 }
 
