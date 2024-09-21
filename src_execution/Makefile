@@ -21,7 +21,7 @@ $(NAME): $(SRCs) $(Libft)
 $(Libft):
 	make -s -C libft
 	make bonus -s -C libft 
-	
+
 # Target to clean up object files
 clean:
 	rm -f $(NAME)
